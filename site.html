@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameDesk</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        .navbar {
+            background-color: #6f2c91; /* Roxo */
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .navbar h1 {
+            margin: 0;
+            color: #fff; /* Branco */
+        }
+        .section {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+        .active {
+            display: block;
+        }
+        button, a {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 20px;
+            background-color: #9b59b6; /* Roxo claro */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover, a:hover {
+            background-color: #8e44ad; /* Roxo escuro */
+        }
+        .form-container {
+            background-color: #fff; /* Branco */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            margin: auto;
+            max-width: 400px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #9b59b6; /* Roxo claro */
+            border-radius: 4px;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #6f2c91; /* Roxo */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #6f2c91; /* Roxo */
+            text-align: center;
+        }
+        th {
+            background-color: #9b59b6; /* Roxo claro */
+            color: #fff; /* Branco */
+        }
+        tr:nth-child(even) {
+            background-color: #e6e6fa; /* Lavanda clara */
+        }
+        .jogo {
+            margin: 10px;
+            display: inline-block;
+            text-align: center;
+        }
+        .jogo img {
+            width: 200px; /* Aumentado */
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <h1>GameDesk</h1>
+</div>
+
+<!-- Tela de Login -->
+<div id="login" class="section active">
+    <div class="form-container">
+        <h2>🔑 Login</h2>
+        <form id="loginForm">
+            <input type="text" name="username" placeholder="Usuário" required>
+            <input type="password" name="password" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+        </form>
+        <p>Não tem uma conta? <a href="#" onclick="showSection('cadastrar_usuario')">📝 Cadastre-se</a></p>
+    </div>
+</div>
+
+<!-- Cadastrar Usuário -->
+<div id="cadastrar_usuario" class="section">
+    <div class="form-container">
+        <h2>🆕 Cadastrar Usuário</h2>
+        <form id="cadastroUsuarioForm">
+            <input type="text" id="novoUsuario" placeholder="Usuário" required>
+            <input type="password" id="novaSenha" placeholder="Senha" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <button onclick="showSection('login')">🔙 Voltar ao Login</button>
+    </div>
+</div>
+
+<!-- Painel do Jogador -->
+<div id="painel" class="section">
+    <h2>🎮 Painel do Jogador</h2>
+    <div>
+        <a href="#" onclick="showSection('cadastro_equipes')">🛠️ Cadastrar Equipe</a>
+        <a href="#" onclick="showSection('listar_equipes')">📋 Listar Equipes</a>
+        <a href="#" onclick="showSection('excluir_equipe')">❌ Excluir Equipe</a>
+        <a href="#" onclick="showSection('cadastro_atividades')">📅 Cadastrar Atividade</a>
+        <a href="#" onclick="showSection('listar_atividades')">📝 Listar Atividades</a>
+        <a href="#" onclick="logout()">🚪 Sair</a>
+    </div>
+    <h3>🕹️ Jogos Disponíveis</h3>
+    <div id="listaJogos">
+        <div class="jogo">
+            <img src="https://th.bing.com/th/id/OIP.IlGUP0qOWt-csQLO5HUhlAHaEK?w=334&h=187&c=7&r=0&o=5&pid=1.7" alt="FIFA 22">
+            <p>FIFA 22</p>
+        </div>
+        <div class="jogo">
+            <img src="https://th.bing.com/th/id/R.4f7672f870c3783c94a9daecfdcdb609?rik=9cu4R9UXHeA8EQ&pid=ImgRaw&r=0" alt="Call of Duty: Warzone">
+            <p>Call of Duty: Warzone</p>
+        </div>
+        <div class="jogo">
+            <img src="https://cdn1.dotesports.com/wp-content/uploads/2019/09/12195522/league-of-legends.jpg" alt="League of Legends">
+            <p>League of Legends</p>
+        </div>
+        <div class="jogo">
+            <img src="https://th.bing.com/th/id/OIP.NiN021BoJ3x1C5BN54pMWAHaEK?rs=1&pid=ImgDetMain" alt="Dota 2">
+            <p>Dota 2</p>
+        </div>
+        <div class="jogo">
+            <img src="https://th.bing.com/th/id/OIP._-AJ-88Mw4EjHl0sblzRNQHaDt?rs=1&pid=ImgDetMain" alt="Valorant">
+            <p>Valorant</p>
+        </div>
+    </div>
+</div>
+
+<!-- Cadastro de Equipes -->
+<div id="cadastro_equipes" class="section">
+    <div class="form-container">
+        <h2>🏆 Cadastro de Equipe</h2>
+        <form onsubmit="return cadastrarEquipe(event)">
+            <input type="text" id="nomeEquipe" placeholder="Nome da Equipe" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <button onclick="showSection('painel')">🔙 Voltar ao Painel</button>
+    </div>
+</div>
+
+<!-- Listar Equipes -->
+<div id="listar_equipes" class="section">
+    <h2>📋 Listar Equipes</h2>
+    <table id="equipesTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Linhas serão adicionadas aqui -->
+        </tbody>
+    </table>
+    <button onclick="showSection('painel')">🔙 Voltar ao Painel</button>
+</div>
+
+<!-- Excluir Equipe -->
+<div id="excluir_equipe" class="section">
+    <div class="form-container">
+        <h2>❌ Excluir Equipe</h2>
+        <p>Digite o ID da equipe para excluir:</p>
+        <input type="number" id="idExcluir" placeholder="ID da Equipe">
+        <button onclick="excluirEquipe()">Excluir</button>
+        <button onclick="showSection('painel')">🔙 Voltar ao Painel</button>
+    </div>
+</div>
+
+<!-- Cadastro de Atividade -->
+<div id="cadastro_atividades" class="section">
+    <div class="form-container">
+        <h2>📅 Cadastro de Atividade</h2>
+        <form onsubmit="return cadastrarAtividade(event)">
+            <textarea id="descricaoAtividade" placeholder="Descrição da Atividade" required></textarea>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <button onclick="showSection('painel')">🔙 Voltar ao Painel</button>
+    </div>
+</div>
+
+<!-- Listar Atividades -->
+<div id="listar_atividades" class="section">
+    <h2>📝 Listar Atividades</h2>
+    <table id="atividadesTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Linhas serão adicionadas aqui -->
+        </tbody>
+    </table>
+    <button onclick="showSection('painel')">🔙 Voltar ao Painel</button>
+</div>
+
+<!-- Tela de Logout -->
+<div id="logout" class="section">
+    <div class="form-container">
+        <h2>🚪 Logout</h2>
+        <p>Você saiu do sistema.</p>
+        <button onclick="showSection('login')">🔙 Voltar ao Login</button>
+    </div>
+</div>
+
+<script>
+    let equipes = [];
+    let atividades = [];
+    let atividadeId = 0;
+
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => section.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+    }
+
+    document.getElementById('loginForm').onsubmit = function(event) {
+        event.preventDefault();
+        showSection('painel'); // Abre o painel após o login
+    };
+
+    document.getElementById('cadastroUsuarioForm').onsubmit = function(event) {
+        event.preventDefault();
+        const usuario = document.getElementById('novoUsuario').value;
+        alert(`Usuário ${usuario} cadastrado com sucesso!`);
+        document.getElementById('novoUsuario').value = '';
+        document.getElementById('novaSenha').value = '';
+        showSection('login'); // Volta ao login após cadastrar
+    };
+
+    function cadastrarEquipe(event) {
+        event.preventDefault();
+        const nome = document.getElementById('nomeEquipe').value;
+        const id = equipes.length + 1;
+        equipes.push({ id, nome });
+        alert(`Equipe ${nome} cadastrada com sucesso!`);
+        document.getElementById('nomeEquipe').value = '';
+        showSection('listar_equipes');
+        atualizarTabelaEquipes();
+    }
+
+    function atualizarTabelaEquipes() {
+        const tableBody = document.querySelector('#equipesTable tbody');
+        tableBody.innerHTML = '';
+        equipes.forEach(equipe => {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>${equipe.id}</td><td>${equipe.nome}</td>
+                            <td><button onclick="excluirEquipe(${equipe.id})">Excluir</button></td>`;
+            tableBody.appendChild(row);
+        });
+    }
+
+    function excluirEquipe(id) {
+        equipes = equipes.filter(equipe => equipe.id !== id);
+        alert(`Equipe ID ${id} excluída com sucesso!`);
+        atualizarTabelaEquipes();
+    }
+
+    function cadastrarAtividade(event) {
+        event.preventDefault();
+        const descricao = document.getElementById('descricaoAtividade').value;
+        const id = ++atividadeId;
+        atividades.push({ id, descricao });
+        alert(`Atividade cadastrada: ${descricao}`);
+        document.getElementById('descricaoAtividade').value = '';
+        showSection('listar_atividades');
+        atualizarTabelaAtividades();
+    }
+
+    document.getElementById('cadastroUsuarioForm').onsubmit = async function(event) {
+    event.preventDefault();
+    const usuario = document.getElementById('novoUsuario').value;
+    const senha = document.getElementById('novaSenha').value;
+
+    const response = await fetch('http://localhost:3000/cadastro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: usuario, password: senha })
+    });
+
+    if (response.ok) {
+        alert('Usuário cadastrado com sucesso!');
+        document.getElementById('novoUsuario').value = '';
+        document.getElementById('novaSenha').value = '';
+        showSection('login');
+    } else {
+        alert('Erro ao cadastrar usuário.');
+    }
+};
+
+    function atualizarTabelaAtividades() {
+        const tableBody = document.querySelector('#atividadesTable tbody');
+        tableBody.innerHTML = '';
+        atividades.forEach(atividade => {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>${atividade.id}</td><td>${atividade.descricao}</td>
+                            <td><button onclick="excluirAtividade(${atividade.id})">Excluir</button></td>`;
+            tableBody.appendChild(row);
+        });
+    }
+
+    function excluirAtividade(id) {
+        atividades = atividades.filter(atividade => atividade.id !== id);
+        alert(`Atividade ID ${id} excluída com sucesso!`);
+        atualizarTabelaAtividades();
+    }
+
+    function logout() {
+        showSection('logout');
+    }
+</script>
+
+</body>
+</html>
